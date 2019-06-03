@@ -1,0 +1,29 @@
+{
+  "name": "my-app",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^4.0.6",
+    "axios": "^0.19.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "bootstrap": "^4.3.1",
+    "fbjs": "^1.0.0",
+    "formik": "^1.5.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-modal": "^3.8.1",
+    "react-on-rails": "11.3.0",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "redux-actions": "^2.6.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^5.10.0",
+    "redux-saga": "^1.0.2",
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.5.1"
+  }
+}
