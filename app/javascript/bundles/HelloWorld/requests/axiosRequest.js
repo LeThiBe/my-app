@@ -27,4 +27,11 @@ export default class AxiosRequest {
       method: 'GET',
     })
   }
+
+  post({url, data = {}}) {
+    return this.executeRequest(url, {
+      method: 'POST',
+      data,
+    })
+  }
 }

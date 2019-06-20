@@ -1,0 +1,2 @@
+token:
+  time_expired: <%= 2.hours %>

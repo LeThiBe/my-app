@@ -6,7 +6,7 @@ import { persistor, store } from '../configureStore'
 import { PersistGate } from 'redux-persist/integration/react';
 import ListUsers from './ListUsers';
 import StaticPage from './StaticPage';
-// import FormikForm from './form/signupForm';
+import SignupForm from './form/signupForm';
 import '../css/main.scss';
 
 const HelloWorld = () => (
@@ -14,7 +14,7 @@ const HelloWorld = () => (
     <PersistGate persistor={persistor}>
       <Router>
         <Route path="/" component={StaticPage} exact/>
-        {/* <Route path="/signup" component={FormikForm} exact/> */}
+          <Route path="/signup" component={SignupForm} exact/>
       </Router>
     </PersistGate>
   </Provider>
