@@ -9,7 +9,6 @@ import SignupRequest from '../requests/signupRequest';
 
 function* signupSaga(action) {
   const { values, meta: { setErrors } } = action.payload;
-  debugger
   try {
     const response =  yield call([SignupRequest, SignupRequest.signup], values);
     yield put(saveDataLogin(response.data));

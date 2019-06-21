@@ -11,8 +11,6 @@ function* loginSaga(action) {
   const { values, meta: { setErrors } } = action.payload;
 
   try {
-    debugger;
-
     const response = yield call([LoginRequest, LoginRequest.login], values);
 
     console.log(response.data);
