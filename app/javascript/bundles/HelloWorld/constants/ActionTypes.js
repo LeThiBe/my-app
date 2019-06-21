@@ -7,6 +7,7 @@ const ActionTypes = keyMirror({
   SAVE_USERS: null,
   LOGIN: null,
   SAVE_DATA_LOGIN: null,
+  SIGNUP: null,
 });
 
 export default ActionTypes;

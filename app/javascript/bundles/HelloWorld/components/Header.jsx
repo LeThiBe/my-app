@@ -88,7 +88,7 @@ class Header extends React.Component {
           <button className ="close-button" onClick={() => this.closeModalLogin()}>X</button>
           <LoginForm />
         </Modal>
-        {/* <Modal isOpen={this.state.modalSignupIsOpen}
+        <Modal isOpen={this.state.modalSignupIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           ariaHideApp={false}
@@ -96,7 +96,7 @@ class Header extends React.Component {
           contentLabel="Example">
           <button className ="close-button" onClick={() => this.closeModalSignup()}>X</button>
           <SignupForm />
-        </Modal> */}
+        </Modal>
       </React.Fragment>
     );
   }
