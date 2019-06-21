@@ -30,4 +30,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  api:
+    error:
+      record_not_found: "Record not found"
+      unauthorized: "Unauthorized"
+      missing_token: "Missing token"
+      record_invalid: "Record invalid"
+      authentication_error: "Authentication error"
+      invalid_token: "Invalid token"
+      expired_signature: "Expired signature"
+      decode_error: "Decode error"
+  posts:
+    update:
+      update_fail: "Update post failed"
+    destroy:
+      destroy_success: "Destroy post successfully"
+      destroy_fail: "Destroy post failed"
+

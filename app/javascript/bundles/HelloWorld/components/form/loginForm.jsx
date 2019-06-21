@@ -1,15 +1,28 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage, withFormik } from 'formik';
+import { Form, Field, ErrorMessage, withFormik, FormikBag } from 'formik';
 import * as Yup from "yup";
+import { connect } from 'react-redux';
+import { login } from '../../actions/AppActions'
 
-const LoginForm = props => {
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(5, 'Too Short!')
+    .max(70, 'Too Long!')
+    .required('Required'),
+});
+
+const Login = props => {
   const {
     values,
     touched,
     errors,
     handleChange,
     handleBlur,
-    handleSubmit
+    handleSubmit,
   } = props;
   return (
     <Form className="login100-form validate-form" onSubmit={handleSubmit}>
@@ -20,14 +33,14 @@ const LoginForm = props => {
                 Login
               </span>
 
-              <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+              {/* <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                 <Field className="input100" type="text" name="name" placeholder="Name" onChange={handleChange} onBlur={handleBlur} value={values.name}/>
                   <div className="err-message"><ErrorMessage name="name" /></div>
                 <span className="focus-input100"></span>
                 <span className="symbol-input100">
                   <span className="lnr lnr-envelope"></span>
                 </span>
-              </div>
+              </div> */}
 
               <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                 <Field className="input100" type="text" name="email" placeholder="Email"/>
@@ -55,9 +68,7 @@ const LoginForm = props => {
               </div>
               
               <div className="container-login100-form-btn p-t-15">
-                <button className="login100-form-btn">
-                  Login
-                </button>
+              	<input type="submit" name="submit" id="submit" className="login100-form-btn" value="Login"/>
               </div>
 
               <div className="text-center w-full p-t-25">
@@ -76,4 +87,16 @@ const LoginForm = props => {
   );
 };
 
-export default LoginForm;
+const LoginForm = withFormik({
+  mapPropsToValues: () => ({
+    password: '123123',
+    email: 'le.thi.be@sun-asterisk.com',
+  }),
+  validationSchema: LoginSchema,
+  handleSubmit: (values, formikBag: FormikBag) => {
+    const { setErrors, props: {login} } = formikBag;
+    login({ values, meta: { setErrors } });
+  },
+})(Login);
+
+export default connect(null, {login})(LoginForm);

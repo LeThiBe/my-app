@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import LoginForm from './form/loginForm';
-import SignupForm from './form/signupForm'
 import Modal from 'react-modal';
 import { Formik, FormikProps, Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
@@ -18,30 +17,27 @@ const customStyles = {
   }
 };
 
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(5, 'Too Short!')
+    .max(70, 'Too Long!')
+    .required('Required'),
+});
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      modalLoginIsOpen: false,
-      modalSignupIsOpen: false,
+      modalIsOpen: false,
     };
   }
 
-  openModalLogin() {
-    this.setState({ modalLoginIsOpen: true });
-  }
-
-  closeModalLogin() {
-    this.setState({ modalLoginIsOpen: false })
-  }
-
-  openModalSignup() {
-    this.setState({ modalSignupIsOpen: true })
-  }
-
-  closeModalSignup() {
-    this.setState({ modalSignupIsOpen: false })
+  openModal() {
+    this.setState({modalIsOpen: true});
   }
 
   render () {
@@ -74,32 +70,43 @@ class Header extends React.Component {
               </ul>
             </li>
 
-            <li className="mr-lg-4 mr-3" ><a onClick={() => this.openModalLogin()} href="#">Log In</a></li>
-            <li><a onClick={() => this.openModalSignup()} href="#">Sign Up</a></li>
+            <li className="mr-lg-4 mr-3" ><a onClick={() => this.openModal()} href="#">Log In</a></li>
+            <li><Link to="/signup">Sign Up</Link></li>
           </ul>
         </nav>
       </div>
-        <Modal isOpen={this.state.modalLoginIsOpen}
+      <Modal isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           ariaHideApp={false}
           style={customStyles}
           contentLabel="Example">
-          <button className ="close-button" onClick={() => this.closeModalLogin()}>X</button>
-          <LoginForm />
-        </Modal>
-        <Modal isOpen={this.state.modalSignupIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          ariaHideApp={false}
-          style={customStyles}
-          contentLabel="Example">
-          <button className ="close-button" onClick={() => this.closeModalSignup()}>X</button>
-          <SignupForm />
+          <LoginForm
+            values={values}
+            touched={touched}
+            errors={errors}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            handleSubmit={handleSubmit}
+          />
         </Modal>
       </React.Fragment>
     );
   }
 }
 
-export default Header;
+const HeaderForm = withFormik({
+  mapPropsToValues: () => ({
+      password: '',
+      email: '',
+    }),
+    validationSchema: LoginSchema,
+    handleSubmit: (values, { setSubmitting }) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 1000);
+  },
+})(Header);
+
+export default HeaderForm;

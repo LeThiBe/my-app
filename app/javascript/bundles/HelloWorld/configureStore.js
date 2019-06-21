@@ -8,14 +8,20 @@ import rootReducer from './reducers/rootReducers';
 import storage from 'redux-persist/lib/storage'
 import rootSaga from './sagas/rootSaga';
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
-import { persistReducer, persistStore } from "redux-persist";
+import { persistReducer, persistStore, createTransform } from "redux-persist";
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
   key: 'root',
   storage: storage,
-  stateReconciler: autoMergeLevel2
+  stateReconciler: autoMergeLevel2,
+  whitelist: ['login'],
+  transforms: [createTransform(
+    inboundState => ({ ...inboundState, error: '' }),
+    outboundState => ({ ...outboundState, error: '' }),
+    { whitelist: ['login'] },
+  )],
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);

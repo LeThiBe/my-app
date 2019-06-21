@@ -4,7 +4,10 @@ import { AST_Null } from 'terser';
 
 const ActionTypes = keyMirror({
   GET_USERS: null,
-  SAVE_USERS: null
+  SAVE_USERS: null,
+  LOGIN: null,
+  SAVE_DATA_LOGIN: null,
+  SIGNUP: null,
 });
 
 export default ActionTypes;

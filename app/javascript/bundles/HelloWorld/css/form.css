@@ -668,4 +668,9 @@ button[type=submit]:hover{background:#000;
       font-size: 25px;
     }
   }
+
+.close-button {
+  background-color: #d33f8d;
+  width: 30px;
+}
 /*--//responsive--*/
